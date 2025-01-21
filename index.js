@@ -1,18 +1,17 @@
-const printNameAndEmail = ({ name, email }) => {
-    console.log(`Name: ${name}`);
-    console.log(`Email: ${email}`);
-};
+//Setup Express server
+const express=require('express');
+const app=express();
 
-// Example usage:
-printNameAndEmail({ name: "Akash Kumar Singh", email: "akash@example.com" });
+const PORT=5000;
 
-const printData = (obj) => {
-    const { name, email } = obj; // Destructure name and email from the object
-    console.log(`Name: ${name}`);
-    console.log(`Email: ${email}`);
-};
+//Define route
+app.get('/',(req,res)=>{
+    res.send('Hello I am from express server');
+})
+app.get('/home',(req,res)=>{
+    res.send('Hello I am from home page');
+})
 
-// Example usage:
-const person = { name: "Akash Kumar Singh", email: "akash@example.com" };
-printData(person);
-
+app.listen(PORT,()=>{
+    console.log(`Your express server started on port ${PORT}`)
+})
