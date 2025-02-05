@@ -1,17 +1,19 @@
-//Setup Express server
-const express=require('express');
-const app=express();
+// Setup Express server
+const express = require('express');
+const app = express();
+const dotenv = require("dotenv");
+const { globalErrors } = require('./helpers/errorHandlers');
+dotenv.config();
+app.use(express.json());
 
-const PORT=5000;
+const apiprefix = process.env.APIPREFIX;
 
-//Define route
-app.get('/',(req,res)=>{
-    res.send('Hello I am from express server');
-})
-app.get('/home',(req,res)=>{
-    res.send('Hello I am from home page');
-})
+app.use(apiprefix, require("./routes/commonRoutes"));
+app.use(apiprefix, require("./routes/loginRoutes"));
+app.use(apiprefix, require("./routes/orderRoutes"));
+app.use(globalErrors);
 
-app.listen(PORT,()=>{
-    console.log(`Your express server started on port ${PORT}`)
+const PORT = process.env.PORT || 7000;
+app.listen(PORT, () => {
+    console.log(`Your express server sarted on port ${PORT}`)
 })
